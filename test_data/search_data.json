@@ -1,0 +1,35 @@
+{
+  "valid_searches": [
+    {
+      "destination": "New York",
+      "checkin": "2026-04-15",
+      "checkout": "2026-04-20",
+      "adults": 2,
+      "description": "NYC summer trip"
+    },
+    {
+      "destination": "London",
+      "checkin": "2026-04-10",
+      "checkout": "2026-04-15",
+      "adults": 1,
+      "description": "Solo London trip"
+    },
+    {
+      "destination": "Paris",
+      "checkin": "2026-04-20",
+      "checkout": "2026-04-25",
+      "adults": 2,
+      "description": "Paris couple trip"
+    }
+  ],
+  "invalid_searches": [
+    {
+      "destination": "xyzinvalidcity123",
+      "description": "Non-existent city"
+    },
+    {
+      "destination": "",
+      "description": "Empty destination"
+    }
+  ]
+}
