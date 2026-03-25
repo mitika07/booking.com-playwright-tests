@@ -52,6 +52,9 @@ class SearchResultsPage(BasePage):
 
     def filter_by_stars(self, stars: int):
         locator = self.STAR_FILTER.format(stars)
+        self.wait_for_results()
+        # Wait for results to fully stabilise after initial render
+        self.page.wait_for_timeout(2000)
         self.page.locator(locator).first.click()
         self.page.wait_for_load_state("domcontentloaded")
 
