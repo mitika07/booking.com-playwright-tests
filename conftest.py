@@ -5,7 +5,15 @@ from playwright.sync_api import sync_playwright, Page
 @pytest.fixture(scope="session")
 def browser():
     with sync_playwright() as p:
-        browser = p.chromium.launch(headless=True, slow_mo=500)
+        browser = p.chromium.launch(
+            headless=True,
+            args=[
+                "--no-sandbox",
+                "--disable-setuid-sandbox",
+                "--disable-dev-shm-usage",
+                "--disable-blink-features=AutomationControlled",
+            ]
+        )
         yield browser
         browser.close()
 
@@ -15,12 +23,10 @@ def page(browser):
     context = browser.new_context(
         viewport={"width": 1280, "height": 720},
         locale="en-US",
+        user_agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36"
     )
     page = context.new_page()
-
-    # Automatically dismiss sign-in popup on every page navigation
     page.on("load", lambda: _dismiss_sign_in_popup(page))
-
     yield page
     context.close()
 

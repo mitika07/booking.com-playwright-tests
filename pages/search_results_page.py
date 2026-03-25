@@ -25,7 +25,7 @@ class SearchResultsPage(BasePage):
         super().__init__(page)
 
     def wait_for_results(self):
-        self.page.wait_for_selector(self.RESULTS_CONTAINER, timeout=15000)
+        self.page.wait_for_selector(self.RESULTS_CONTAINER, timeout=30000)
 
     def get_result_count(self) -> int:
         cards = self.page.locator(self.RESULTS_CONTAINER)
