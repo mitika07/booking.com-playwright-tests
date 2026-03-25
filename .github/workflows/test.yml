@@ -6,7 +6,7 @@ on:
   pull_request:
     branches: [main]
   schedule:
-    - cron: '0 9 * * 1'  # Every Monday at 9am
+    - cron: "0 9 * * 1" # Every Monday at 9am
 
 jobs:
   test:
@@ -14,12 +14,12 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
-          python-version: '3.11'
+          python-version: "3.11"
 
       - name: Install dependencies
         run: |
@@ -33,14 +33,14 @@ jobs:
         run: pytest tests/ -v --html=reports/report.html --self-contained-html
 
       - name: Upload test report
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         if: always()
         with:
           name: test-report
           path: reports/report.html
 
       - name: Upload screenshots on failure
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         if: failure()
         with:
           name: failure-screenshots
